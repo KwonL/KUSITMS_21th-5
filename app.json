@@ -1,16 +1,15 @@
 {
   "expo": {
     "name": "5조",
-    "slug": "5조",
+    "slug": "KUSITMS-5",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "5조",
+    "scheme": "kusitms-5",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -25,8 +24,9 @@
     "ios": {
       "supportsTablet": true
     },
-    "web": {
-      "favicon": "./assets/images/favicon.png"
+    "android": {
+      "package": "com.kusitms.group_5",
+      "versionCode": 1
     }
   }
 }

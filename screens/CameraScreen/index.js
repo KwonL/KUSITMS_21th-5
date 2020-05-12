@@ -1,52 +1,150 @@
 import React, { useEffect, useState } from 'react';
-import { View, Button, Image } from 'react-native';
+import { View, ActivityIndicator, Image, Text, Platform, TouchableOpacity, ImageEditor } from 'react-native';
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
+import { Camera } from 'expo-camera';
+import styles from './styles';
+import axios from 'axios';
+
+const ImagePreviewView = (props) => {
+  const [prediction, setPrediction] = useState('');
+
+  const predict = () => {
+    props.setIsLoading(true);
+
+    const formData = new FormData();
+    formData.append('file', {
+      name: 'file',
+      type: 'image/jpeg', // Don't miss this!!!
+      uri: Platform.OS === 'android' ? props.image : props.image.replace('file://', ''),
+    });
+
+    axios.post(
+      "https://food-img-classifier.herokuapp.com/api/classify",
+      formData,
+      {
+        headers: {
+          'content-type': 'multipart/form-data'
+        }
+      }
+    ).then(res => {
+      setPrediction(res.data.predictions[0].class);
+    }).catch(err => {
+      console.log(err);
+    }).finally(() => {
+      props.setIsLoading(false);
+    });
+  }
+
+  return (
+    <View style={styles.cameraViewContainer}>
+      <Image source={{ uri: props.image }} style={styles.previewImage} />
+      <View style={styles.choiceButtonContainer}>
+        <TouchableOpacity onPress={() => {
+          props.setImage(null);
+        }}>
+          <Text style={{ fontSize: 20 }}>다시 찍기</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={predict}>
+          <Text style={{ fontSize: 20 }}>사용하기</Text>
+        </TouchableOpacity>
+      </View>
+      {prediction !== '' && (<Text>{prediction}</Text>)}
+    </View >
+  )
+}
+
+const CameraView = (props) => {
+  const [cameraRef, setCameraRef] = useState(null);
+
+  const _pickImage = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    if (!result.cancelled)
+      props.setImage(result.uri);
+  };
+
+  return (
+    <View style={styles.cameraViewContainer}>
+      <Camera
+        ref={ref => setCameraRef(ref)}
+        style={styles.cameraPreview}
+      />
+      <TouchableOpacity
+        style={styles.picButtonContainer}
+        onPress={async () => {
+          if (cameraRef) {
+            const res = await cameraRef.takePictureAsync();
+            props.setImage(res.uri);
+          }
+        }}>
+        <View style={styles.picButtonInner}>
+          <View style={styles.picButtonOuter} />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.albumButton} onPress={_pickImage}>
+        <Text style={styles.albumText}>앨범 탐색 버튼이 올 곳</Text>
+      </TouchableOpacity>
+    </View>
+  )
+}
 
 export default CameraScreen = (props) => {
   const [image, setImage] = useState(null);
-
-  const _pickImage = async () => {
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [1, 1],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        setImage(result.uri);
-      }
-
-      console.log(result);
-    } catch (E) {
-      console.log(E);
-    }
-  };
-
-  const _takeImage = async () => {
-    const result = await ImagePicker.launchCameraAsync();
-    if (!result.cancelled)
-      setImage(result.uri);
-  };
+  const [cameraPermission, setCameraPermission] = useState(null);
+  const [rollPermission, setRollPermission] = useState(null);
+  const [screenLoaded, setScreenLoaded] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     (async () => {
-      if (Constants.platform.ios) {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== 'granted') {
-          alert('Sorry, we need camera roll permissions to make this work!');
-        }
+      let status = null;
+      if (Platform.OS === 'ios') {
+        result = (await Permissions.askAsync(Permissions.CAMERA_ROLL)).status;
+        setRollPermission(result === 'granted');
+      } else {
+        setRollPermission(true);
       }
+
+      status = (await Permissions.askAsync(Permissions.CAMERA)).status;
+      setCameraPermission(status === 'granted');
     })();
-  })
+
+    props.navigation.addListener('blur', () => {
+      setScreenLoaded(false);
+    });
+    props.navigation.addListener('focus', () => {
+      setImage(null);
+      setScreenLoaded(true);
+    });
+    setIsLoading(false);
+
+    return () => { };
+  }, []);
+
+  if (!rollPermission || !cameraPermission) {
+    return <Text>카메라 접근 권한이 필요합니다.</Text>;
+  }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-evenly' }}>
-      <Button title="앨범에서 가져오기!" onPress={_pickImage} />
-      <Button title="사진 찍기!" onPress={_takeImage} />
-      {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+    <View>
+      {image ?
+        <ImagePreviewView
+          image={image}
+          setImage={setImage}
+          setIsLoading={setIsLoading}
+        /> :
+        (screenLoaded && (
+          <CameraView
+            setImage={setImage}
+          />))}
+      {isLoading ?
+        <ActivityIndicator color='blue' /> : null}
     </View>
   );
 };
