@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "5조",
+    "slug": "5조",
     "platforms": [
       "ios",
       "android",
@@ -10,7 +10,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "5조",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
