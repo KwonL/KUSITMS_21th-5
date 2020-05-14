@@ -40,12 +40,12 @@ const ImagePreviewView = (props) => {
     <View style={styles.cameraViewContainer}>
       <Image source={{ uri: props.image }} style={styles.previewImage} />
       <View style={styles.choiceButtonContainer}>
-        <TouchableOpacity onPress={() => {
+        <TouchableOpacity disabled={props.isLoading} onPress={() => {
           props.setImage(null);
         }}>
           <Text style={{ fontSize: 20 }}>다시 찍기</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={predict}>
+        <TouchableOpacity disabled={props.isLoading} onPress={predict}>
           <Text style={{ fontSize: 20 }}>사용하기</Text>
         </TouchableOpacity>
       </View>
@@ -137,6 +137,7 @@ export default CameraScreen = (props) => {
         <ImagePreviewView
           image={image}
           setImage={setImage}
+          isLoading={isLoading}
           setIsLoading={setIsLoading}
         /> :
         (screenLoaded && (

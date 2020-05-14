@@ -34,7 +34,7 @@ export default function App(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+    backgroundColor: '#D8DFE581',
+    // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
   },
 });
