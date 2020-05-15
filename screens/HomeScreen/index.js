@@ -38,7 +38,7 @@ export default HomeScreen = (props) => {
 
   return (
     <ScrollView style={styles.container} >
-      <KakaoRegularText style={styles.welcomeText}>안녕하세요, 이규원님</KakaoRegularText>
+      <KakaoBoldText style={styles.welcomeText}>안녕하세요, 이규원님</KakaoBoldText>
 
       <View style={[styles.sectionContainer, { height: 233 }]}>
         <View style={{
