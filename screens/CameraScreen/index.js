@@ -4,31 +4,23 @@ import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
 import styles from './styles';
-import axios from 'axios';
+import axios from '../../utils/axios'
 
 const ImagePreviewView = (props) => {
   const [prediction, setPrediction] = useState('');
 
-  const predict = () => {
+  const predict = async () => {
     props.setIsLoading(true);
 
-    const formData = new FormData();
-    formData.append('file', {
-      name: 'file',
-      type: 'image/jpeg', // Don't miss this!!!
-      uri: Platform.OS === 'android' ? props.image : props.image.replace('file://', ''),
-    });
-
-    axios.post(
-      "https://food-img-classifier.herokuapp.com/api/classify",
-      formData,
-      {
-        headers: {
-          'content-type': 'multipart/form-data'
-        }
+    axios.post('/food/gallery', {
+      type: '아침',
+      image: props.image.base64,
+    }).then(res => {
+      if (res.status === 201) {
+        setPrediction(res.data.name);
+      } else {
+        console.log(res.data);
       }
-    ).then(res => {
-      setPrediction(res.data.predictions[0].class);
     }).catch(err => {
       console.log(err);
     }).finally(() => {
@@ -38,7 +30,7 @@ const ImagePreviewView = (props) => {
 
   return (
     <View style={styles.cameraViewContainer}>
-      <Image source={{ uri: props.image }} style={styles.previewImage} />
+      <Image source={{ uri: props.image.uri }} style={styles.previewImage} />
       <View style={styles.choiceButtonContainer}>
         <TouchableOpacity disabled={props.isLoading} onPress={() => {
           props.setImage(null);
@@ -78,8 +70,8 @@ const CameraView = (props) => {
         style={styles.picButtonContainer}
         onPress={async () => {
           if (cameraRef) {
-            const res = await cameraRef.takePictureAsync();
-            props.setImage(res.uri);
+            const res = await cameraRef.takePictureAsync({ base64: true });
+            props.setImage(res);
           }
         }}>
         <View style={styles.picButtonInner}>

@@ -5,6 +5,7 @@ import { Platform, StatusBar, StyleSheet, SafeAreaView } from 'react-native';
 
 import useCachedResources from './hooks/useCachedResources';
 import BottomTabNavigator from './navigation/BottomTabNavigator';
+import LoginScreen from './screens/LoginScreen';
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App(props) {
               headerShown: false
             }}
           >
+            <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Root" component={BottomTabNavigator} />
           </Stack.Navigator>
         </NavigationContainer>
