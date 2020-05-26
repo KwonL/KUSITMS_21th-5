@@ -1,41 +1,35 @@
-import React from 'react';
-import { Image, Text, View, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Image, View, ScrollView } from 'react-native';
 import { PieChart } from 'react-native-svg-charts'
 import * as Progress from 'react-native-progress';
+
+import axios from '../../utils/axios';
 import styles from './styles';
 import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
 
-export default HomeScreen = (props) => {
-  const data = {
-    calorie: 2332,
-    nutrients: {
-      carbohydrate: 0.5,
-      protein: 0.25,
-      fat: 0.25
-    },
-    shop: [
-      {
-        id: 1,
-        image: require("../../assets/images/examples/51ecf486857b199be7d6cfa602edcbf9.jpg"),
-        description: "[맛있닭] 체중 조절 식단, 다이어트 도시락! & 소스 증정",
-        price: "₩19,500"
-      },
-      {
-        id: 2,
-        image: require("../../assets/images/examples/hjan_6SecZfmOkSxpTwW.jpg"),
-        description: "다노 다노 한 끼 도시락",
-        price: '₩19,500'
-      },
-      {
-        id: 2,
-        image: require("../../assets/images/robot-prod.png"),
-        description: "테스트 테스트",
-        price: '₩19,500'
-      }
-    ]
-  }
+export default HomeScreen = props => {
+  let [data, setData] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  return (
+  useEffect(() => {
+    (async () => {
+      const res = await axios.get('/login');
+      const sample_data = {
+        calorie: 2332,
+        nutrients: {
+          carbohydrate: 0.5,
+          protein: 0.25,
+          fat: 0.25
+        },
+      };
+      data = sample_data;
+      data.name = res.data.kor_name;
+      setData(data);
+      setLoading(false);
+    })();
+  }, [data]);
+
+  return loading? <View /> : (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <KakaoBoldText style={styles.titleText}>
@@ -47,7 +41,7 @@ export default HomeScreen = (props) => {
           {/* 캐릭터 이미지 */}
         </View>
 
-        <KakaoRegularText style={styles.msgText}>오늘 규원님의 영양 상태</KakaoRegularText>
+        <KakaoRegularText style={styles.msgText}>오늘 {data.name}님의 영양 상태</KakaoRegularText>
 
         <View style={[styles.sectionContainer, { marginBottom: 100 }]}>
           <KakaoBoldText style={styles.nutAlertText}>지방 섭취가 부족해요!</KakaoBoldText>
