@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { View, Text } from "react-native";
 import axios from '../../utils/axios';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
-import { StackActions, NavigationActions } from 'react-navigation';
-
 
 export default LoginScreen = props => {
   const [username, setUsername] = useState('');
