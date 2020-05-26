@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text } from "react-native";
 import axios from '../../utils/axios';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { StackActions, NavigationActions } from 'react-navigation';
 
 
 export default LoginScreen = props => {
@@ -9,9 +10,13 @@ export default LoginScreen = props => {
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    axios.get('/login').then(res => {
-      if (res.status === 200)
-        props.navigation.navigate('Root');
+    axios.get('/login').then(res => { 
+      if (res.status === 200) {
+        props.navigation.reset({
+          index: 0,
+          routes: [{name: 'Root'}]
+        });
+      }
     }).catch(err => {
       console.log(err);
     });
@@ -22,8 +27,12 @@ export default LoginScreen = props => {
       username: username,
       password: password,
     }).then(res => {
-      if (res.status === 200)
-        props.navigation.navigate('Root');
+      if (res.status === 200) {
+        props.navigation.reset({
+          index: 0,
+          routes: [{name: 'Root'}]
+        });
+      }
       else
         console.log(res.data);
     }).catch(err => {
