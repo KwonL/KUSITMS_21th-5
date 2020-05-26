@@ -27,7 +27,7 @@ export default HomeScreen = props => {
       setData(data);
       setLoading(false);
     })();
-  }, [data]);
+  }, []);
 
   return loading? <View /> : (
     <View style={styles.container}>
