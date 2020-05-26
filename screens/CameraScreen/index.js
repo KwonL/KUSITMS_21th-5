@@ -55,9 +55,10 @@ const CameraView = (props) => {
       allowsEditing: true,
       aspect: [1, 1],
       quality: 1,
+      base64: true,
     });
     if (!result.cancelled)
-      props.setImage(result.uri);
+      props.setImage(result);
   };
 
   return (
@@ -129,7 +130,6 @@ export default CameraScreen = (props) => {
         <ImagePreviewView
           image={image}
           setImage={setImage}
-          isLoading={isLoading}
           setIsLoading={setIsLoading}
         /> :
         (screenLoaded && (
