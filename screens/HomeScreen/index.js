@@ -8,7 +8,6 @@ import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
 export default HomeScreen = (props) => {
   const data = {
     calorie: 2332,
-    calorie_percent: 0.8,
     nutrients: {
       carbohydrate: 0.5,
       protein: 0.25,
@@ -37,86 +36,107 @@ export default HomeScreen = (props) => {
   }
 
   return (
-    <ScrollView style={styles.container} >
-      <KakaoBoldText style={styles.welcomeText}>안녕하세요, 이규원님</KakaoBoldText>
-
-      <View style={[styles.sectionContainer, { height: 233 }]}>
-        <View style={{
-          marginLeft: 'auto',
-          marginRight: 'auto'
-        }}>
-          <Image
-            style={styles.characterImage}
-          // source={require('../../assets/images/examples/character-ex.png')}
-          />
-        </View>
+    <View style={styles.container}>
+      <View style={styles.titleContainer}>
+        <KakaoBoldText style={styles.titleText}>
+          단짠단짠
+        </KakaoBoldText>
       </View>
-
-      <KakaoRegularText style={styles.msgText}>목표 칼로리 달성률</KakaoRegularText>
-
-      <View style={styles.sectionContainer}>
-        <Progress.Bar style={styles.progressBar} progress={data.calorie_percent} color='#87A9C3' unfilledColor='#EBEFF2' width={282} height={29} borderRadius={7}>
-          <KakaoBoldText style={styles.progressText}>{data.calorie_percent * 100}%</KakaoBoldText>
-        </Progress.Bar>
-        <Text style={styles.calorieText}>{data.calorie}kcal</Text>
-      </View>
-
-      <KakaoRegularText style={styles.msgText}>오늘 규원님의 영양 상태</KakaoRegularText>
-
-      <View style={[styles.sectionContainer, { marginBottom: 100 }]}>
-        <KakaoBoldText style={styles.nutAlertText}>영양분 섭취가 부족해요!</KakaoBoldText>
-
-        <View style={{ justifyContent: 'center', flex: 1 }}>
-          <KakaoRegularText style={styles.graphCalText}>
-            {`${data.calorie}\nKcal`}
-          </KakaoRegularText>
-          <PieChart
-            style={{ width: 250, height: 250 }}
-            valueAccessor={({ item }) => item.percent}
-            data={[
-              {
-                key: 1,
-                percent: data.nutrients.carbohydrate,
-                svg: { fill: '#EDAB72' }
-              },
-              {
-                key: 2,
-                percent: data.nutrients.protein,
-                svg: { fill: '#CB4F6C' }
-              },
-              {
-                key: 3,
-                percent: data.nutrients.fat,
-                svg: { fill: '#5C82E8' }
-              }
-            ]}
-            spacing={0}
-            outerRadius={'100%'}
-            innerRadius={'75%'}
-            startAngle={Math.PI * 1 / 3}
-            endAngle={Math.PI * 7 / 3}
-          />
+      <ScrollView>
+        <View style={[styles.sectionContainer, { height: 310, backgroundColor: 'white' }]}>
+          {/* 캐릭터 이미지 */}
         </View>
 
-        <View>
-          <View style={{ display: 'flex', flexDirection: 'row', marginTop: 45, alignItems: 'center' }}>
-            <View style={[styles.dot, { backgroundColor: '#EDAB72' }]} />
-            <KakaoRegularText style={{ marginLeft: 16 }}>탄수화물</KakaoRegularText>
-            <KakaoRegularText style={{ marginLeft: 150, color: '#352641' }}>{data.nutrients.carbohydrate * 100}%</KakaoRegularText>
+        <KakaoRegularText style={styles.msgText}>오늘 규원님의 영양 상태</KakaoRegularText>
+
+        <View style={[styles.sectionContainer, { marginBottom: 100 }]}>
+          <KakaoBoldText style={styles.nutAlertText}>지방 섭취가 부족해요!</KakaoBoldText>
+
+          <View style={{ justifyContent: 'center', flex: 1, marginBottom: 15 }}>
+            <View style={styles.graphCalText}>
+              <KakaoRegularText style={{ fontSize: 32, textAlign: 'center' }}>
+                {data.calorie}
+              </KakaoRegularText>
+              <KakaoRegularText style={{ fontSize: 11, textAlign: 'center', color: '#352641', opacity: 53 }}>
+                Total Calories
+              </KakaoRegularText>
+            </View>
+            <PieChart
+              style={{ width: 200, height: 200 }}
+              valueAccessor={({ item }) => item.percent}
+              data={[
+                {
+                  key: 1,
+                  percent: data.nutrients.carbohydrate,
+                  svg: { fill: '#608BAC' }
+                },
+                {
+                  key: 2,
+                  percent: data.nutrients.protein,
+                  svg: { fill: '#D47FA6' }
+                },
+                {
+                  key: 3,
+                  percent: data.nutrients.fat,
+                  svg: { fill: '#B5BACE' }
+                }
+              ]}
+              spacing={0}
+              outerRadius={'100%'}
+              innerRadius={'75%'}
+              startAngle={Math.PI * 1 / 3}
+              endAngle={Math.PI * 7 / 3}
+            />
           </View>
-          <View style={{ display: 'flex', flexDirection: 'row', marginTop: 28 }}>
-            <View style={[styles.dot, { backgroundColor: '#CB4F6C' }]} />
-            <KakaoRegularText style={{ marginLeft: 16 }}>단백질</KakaoRegularText>
-            <KakaoRegularText style={{ marginLeft: 'auto', color: '#352641' }}>{data.nutrients.protein * 100}%</KakaoRegularText>
+
+          <View>
+            <View style={styles.nutpgContainer}>
+              <KakaoRegularText style={styles.pgbarNutText}>
+                탄수화물
+            </KakaoRegularText>
+              <Progress.Bar style={{ alignSelf: 'center' }} progress={data.nutrients.carbohydrate} color='#87A9C3' unfilledColor='#EAE7F0' width={183} height={19} borderRadius={7} />
+              <KakaoRegularText style={styles.pgbarPercentText}>
+                {data.nutrients.carbohydrate * 100}%
+            </KakaoRegularText>
+            </View>
+            <View style={styles.nutpgContainer}>
+              <KakaoRegularText style={styles.pgbarNutText}>
+                단백질
+            </KakaoRegularText>
+              <Progress.Bar progress={data.nutrients.protein} color='#D47FA6' unfilledColor='#EAE7F0' width={183} height={19} borderRadius={7} />
+              <KakaoRegularText style={styles.pgbarPercentText}>
+                {data.nutrients.protein * 100}%
+            </KakaoRegularText>
+            </View>
+            <View style={styles.nutpgContainer}>
+              <KakaoRegularText style={styles.pgbarNutText}>
+                지방
+            </KakaoRegularText>
+              <Progress.Bar progress={data.nutrients.fat} color='#B5BACE' unfilledColor='#EAE7F0' width={183} height={19} borderRadius={7} />
+              <KakaoRegularText style={styles.pgbarPercentText}>
+                {data.nutrients.fat * 100}%
+            </KakaoRegularText>
+            </View>
           </View>
-          <View style={{ display: 'flex', flexDirection: 'row', marginTop: 28, marginBottom: 70 }}>
-            <View style={[styles.dot, { backgroundColor: '#5C82E8' }]} />
-            <KakaoRegularText style={{ marginLeft: 16 }}>지방</KakaoRegularText>
-            <KakaoRegularText style={{ marginLeft: 'auto', color: '#352641' }}>{data.nutrients.fat * 100}%</KakaoRegularText>
+
+          <KakaoRegularText style={styles.msgText}>오늘 필요한 영양</KakaoRegularText>
+          <KakaoBoldText style={[styles.nutAlertText, { marginTop: 30 }]}>지방이 들어간 음식을 드셔보세요!</KakaoBoldText>
+          <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+            <Image
+              style={styles.recommendImage}
+              source={require('../../assets/images/recommend-foods/image1.png')}
+            />
+            <Image
+              style={styles.recommendImage}
+              source={require('../../assets/images/recommend-foods/image2.png')}
+            />
+            <Image
+              style={styles.recommendImage}
+              source={require('../../assets/images/recommend-foods/image3.png')}
+            />
           </View>
         </View>
-      </View>
-
-    </ScrollView >
+      </ScrollView >
+    </View>
   );
 }

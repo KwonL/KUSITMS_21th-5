@@ -5,16 +5,23 @@ export default styles = StyleSheet.create({
         backgroundColor: '#D8DFE581',
         flex: 1
     },
+    titleContainer: {
+        backgroundColor: 'white',
+        borderBottomWidth: 1,
+        borderColor: '#E7E4E9',
+    },
+    titleText: {
+        fontSize: 26,
+        alignSelf: 'center',
+        marginTop: 11,
+        marginBottom: 22,
+    },
     welcomeText: {
         fontSize: 17,
         marginTop: 18,
         alignSelf: 'center'
     },
     sectionContainer: {
-        marginTop: 20,
-        marginHorizontal: 20,
-        backgroundColor: '#FFFFFF',
-        borderRadius: 20,
         alignItems: 'center'
     },
     characterImage: {
@@ -23,8 +30,10 @@ export default styles = StyleSheet.create({
         resizeMode: 'contain'
     },
     msgText: {
+        color: '#334856',
         marginTop: 28,
-        marginLeft: 22,
+        marginLeft: 35,
+        marginRight: 'auto',
         fontSize: 16
     },
     progressBar: {
@@ -69,5 +78,27 @@ export default styles = StyleSheet.create({
         fontSize: 32,
         position: 'absolute',
         alignSelf: 'center'
-    }
+    },
+    nutpgContainer: {
+        marginTop: 25,
+        marginBottom: 30,
+        alignItems: 'center',
+        display: 'flex',
+        flexDirection: 'row',
+        width: '80%',
+    },
+    pgbarNutText: {
+        marginRight: 'auto',
+        color: '#1C1C1C',
+        fontSize: 16,
+    },
+    pgbarPercentText: {
+        marginLeft: 26,
+        color: '#352641',
+        fontSize: 14,
+    },
+    recommendImage: {
+        width: 90,
+        height: 90,
+    },
 });
