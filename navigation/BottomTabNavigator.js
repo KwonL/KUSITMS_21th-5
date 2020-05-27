@@ -4,6 +4,7 @@ import { StyleSheet, Image } from 'react-native';
 
 import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
+import GalleryScreen from '../screens/GalleryScreen/';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -71,8 +72,8 @@ export default function BottomTabNavigator({ navigation, route }) {
         }}
       />
       <BottomTab.Screen
-        name="MyPage"
-        component={HomeScreen}
+        name="Gallery"
+        component={GalleryScreen}
         options={{
           tabBarIcon: ({ focused }) =>
             <Image
