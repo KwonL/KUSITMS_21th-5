@@ -9,11 +9,14 @@ export default styles = StyleSheet.create({
     galleryText: {
         fontSize : 26,
         marginTop : 18,
-        alignSelf : 'center'
+        alignSelf : 'center',
+        marginRight: 'auto',
+        marginLeft: 40,
+        marginBottom: 25,
     },
 
     photoContainer :{
-        marginTop: 10,
+        marginTop: 1,
         backgroundColor: '#FFFFFF',
     },
 
