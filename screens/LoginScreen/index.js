@@ -1,55 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from "react-native";
-import axios from '../../utils/axios';
+import { View, Text } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import axios from '../../utils/axios';
 
-export default LoginScreen = props => {
+export default LoginScreen = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   useEffect(() => {
-    axios.get('/login').then(res => { 
+    axios.get('/login').then((res) => {
       if (res.status === 200) {
         props.navigation.reset({
           index: 0,
-          routes: [{name: 'Root'}]
+          routes: [{ name: 'Root' }],
         });
       }
-    }).catch(err => {
+    }).catch((err) => {
       console.log(err);
     });
   }, []);
 
   const login = () => {
     axios.post('/login', {
-      username: username,
-      password: password,
-    }).then(res => {
+      username,
+      password,
+    }).then((res) => {
       if (res.status === 200) {
         props.navigation.reset({
           index: 0,
-          routes: [{name: 'Root'}]
+          routes: [{ name: 'Root' }],
         });
-      }
-      else
-        console.log(res.data);
-    }).catch(err => {
+      } else { console.log(res.data); }
+    }).catch((err) => {
       console.log(err);
     });
-  }
+  };
 
   return (
     <View>
       <TextInput
-        autoCapitalize='none'
+        autoCapitalize="none"
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={text => setUsername(text)}
+        onChangeText={(text) => setUsername(text)}
       />
       <TextInput
-        autoCapitalize='none'
+        autoCapitalize="none"
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        secureTextEntry={true}
-        onChangeText={text => setPassword(text)}
+        secureTextEntry
+        onChangeText={(text) => setPassword(text)}
       />
       <TouchableOpacity
         onPress={login}
@@ -57,5 +55,5 @@ export default LoginScreen = props => {
         <Text>로그인하기</Text>
       </TouchableOpacity>
     </View>
-  )
-}
+  );
+};
