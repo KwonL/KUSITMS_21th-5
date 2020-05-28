@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import axios from '../../utils/axios';
 
-export default LoginScreen = (props) => {
+export default (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 

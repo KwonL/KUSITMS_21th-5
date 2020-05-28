@@ -91,7 +91,7 @@ const CameraView = (props) => {
   );
 };
 
-export default CameraScreen = (props) => {
+export default (props) => {
   const [image, setImage] = useState(null);
   const [cameraPermission, setCameraPermission] = useState(null);
   const [rollPermission, setRollPermission] = useState(null);
@@ -103,7 +103,7 @@ export default CameraScreen = (props) => {
     (async () => {
       let status = null;
       if (Platform.OS === 'ios') {
-        result = (await Permissions.askAsync(Permissions.CAMERA_ROLL)).status;
+        const result = (await Permissions.askAsync(Permissions.CAMERA_ROLL)).status;
         setRollPermission(result === 'granted');
       } else {
         setRollPermission(true);

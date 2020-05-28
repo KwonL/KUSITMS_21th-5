@@ -7,7 +7,7 @@ import axios from '../../utils/axios';
 import styles from './styles';
 import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
 
-export default HomeScreen = () => {
+export default () => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 

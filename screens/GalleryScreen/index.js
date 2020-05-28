@@ -4,7 +4,7 @@ import { SliderBox } from 'react-native-image-slider-box';
 import styles from './style';
 import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
 
-export default GalleryScreen = () => {
+export default () => {
   const data = [
     {
       id: 1,

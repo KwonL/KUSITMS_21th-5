@@ -24,7 +24,6 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': 'off',
     'global-require': 'off',
-    'no-undef': 'off',
     'react/prop-types': 'off',
     'no-console': 'off',
     'react/destructuring-assignment': 'off',
