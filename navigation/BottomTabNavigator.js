@@ -4,6 +4,7 @@ import * as React from 'react';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
+import RecommendScreen from '../screens/RecommendScreen' //추천 화면 추가
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -23,9 +24,9 @@ export default function BottomTabNavigator({ navigation, route }) {
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-home" />,
         }}
       />
-      <BottomTab.Screen
+      <BottomTab.Screen 
         name="Food"
-        component={HomeScreen}
+        component={RecommendScreen} //추천화면
         options={{
           tabBarIcon: ({ focused }) => <TabBarIcon focused={focused} name="md-pizza" />,
         }}

@@ -47,7 +47,7 @@ export default HomeScreen = (props) => {
         }}>
           <Image
             style={styles.characterImage}
-          // source={require('../../assets/images/examples/character-ex.png')}
+            //source={require('../../assets/images/examples/character-ex.png')}
           />
         </View>
       </View>
