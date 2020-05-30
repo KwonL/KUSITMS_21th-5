@@ -1,48 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScrollView, View } from 'react-native';
 import { SliderBox } from 'react-native-image-slider-box';
 import styles from './style';
 import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
+import axios from '../../utils/axios';
 
-export default () => {
-  const data = [
-    {
-      id: 1,
-      photo_container: {
-        month: 5,
-        day: 15,
-        total_calorie: 2705,
-      },
-      images: [
-        require('../../assets/images/examples/kkhokkho.png'),
-        require('../../assets/images/examples/myfood1.png'),
-        require('../../assets/images/examples/515lunch.png'),
-      ],
-      components: [
-        '매추리알',
-        '양념치킨',
-        '라면사리',
-        '떡갈비',
-        '김치찌개',
-        '공기밥',
-        '보쌈',
-        '김치',
-      ],
-    },
-    {
-      id: 2,
-      photo_container: {
-        month: 5,
-        day: 14,
-        total_calorie: 1900,
-      },
-      images: [
-        require('../../assets/images/examples/myfood2.png'),
-        require('../../assets/images/examples/maramara.png'),
-      ],
-      components: ['하이루', '방가방가'],
-    },
-  ];
+export default (props) => {
+  const [data, setData] = useState([]);
+
+  const fetchData = () => {
+    axios.get('/food/gallery').then((res) => {
+      const tmp = [];
+      res.data.forEach((val, idx) => {
+        const initMonth = 5;
+        const initDay = 15;
+        const slice = res.data.slice(idx, idx + 3);
+
+        if (!(idx % 3)) {
+          tmp.push({
+            id: val.id,
+            photo_container: {
+              month: initMonth,
+              day: initDay + (idx / 3),
+              total_calorie: slice.map((item) => item.kcal).reduce((a, b) => a + b),
+            },
+            images: slice.map((item) => item.image),
+            components: slice.map((item) => item.name)
+              .filter((value, index, self) => self.indexOf(value) === index),
+          });
+        }
+      });
+      tmp.reverse();
+      setData(tmp);
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
+  useEffect(() => {
+    props.navigation.addListener('focus', () => {
+      fetchData(true);
+    });
+  }, []);
 
   return (
     <View style={styles.container}>
