@@ -1,3 +1,4 @@
+// styles.js
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
@@ -10,7 +11,7 @@ export default StyleSheet.create({
     fontSize: 26,
     marginTop: 30,
     marginLeft: 41,
-    marginHorizontal: 24,
+    marginHorizontal: 14,
     borderBottomColor: '#E7E4E9',
   },
 
@@ -26,8 +27,8 @@ export default StyleSheet.create({
   },
 
   filterContainer: {
-    marginTop: 16,
-    display: 'flex',
+    marginTop: 15.49,
+    flex: 1,
     flexDirection: 'row',
 
   },
@@ -37,10 +38,24 @@ export default StyleSheet.create({
     height: 19.8,
     alignContent: 'center',
     resizeMode: 'contain',
+    marginRight: 7,
   },
 
-  filterText: {
-    fontSize: 13,
+  weekText: {
+    fontSize: 17,
+    marginLeft: 52,
+    marginTop: 20,
+  },
+
+  calText: {
+    fontSize: 24,
+    marginLeft: 52,
+    marginTop: 5,
+  },
+
+  circleText: {
+    color: '#259BB1',
+    fontSize: 19,
   },
 
   input: {
@@ -85,5 +100,59 @@ export default StyleSheet.create({
     flexDirection: 'row',
     marginRight: 71,
   },
+  barChart: {
+    borderTopRightRadius: 5,
+  },
 
+  secondContainer: {
+    backgroundColor: '#F1F0F2',
+    height: 558,
+    alignItems: 'center',
+
+  },
+
+  weekContainer: {
+    backgroundColor: '#F1F0F2',
+    marginTop: 0,
+    height: 50,
+  },
+
+  nutpgContainer: {
+    marginTop: 25,
+    marginBottom: 30,
+    alignItems: 'center',
+    display: 'flex',
+    flexDirection: 'row',
+    width: '80%',
+  },
+  graphCalText: {
+    textAlign: 'center',
+    fontSize: 32,
+    position: 'absolute',
+    alignSelf: 'center',
+  },
+  pgbarNutText: {
+    marginRight: 'auto',
+    color: '#1C1C1C',
+    fontSize: 16,
+  },
+  pgbarPercentText: {
+    marginLeft: 26,
+    color: '#352641',
+    fontSize: 14,
+  },
+
+  storyContainer: {
+    backgroundColor: '#FFFFFF',
+    height: 200,
+  },
+
+  comment: {
+    fontSize: 12,
+    color: '#71677A',
+    paddingTop: 15,
+    marginRight: 20,
+    marginLeft: 19,
+    marginBottom: 20,
+  },
 });
