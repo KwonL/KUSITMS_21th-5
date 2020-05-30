@@ -118,6 +118,49 @@ export default styles = StyleSheet.create({
     color: '#1C1C1C',
     fontSize: 13,
     marginTop : 10
-  }
+  },
+
+  comment: {
+    fontSize: 12, 
+    color: "#71677A", 
+    marginTop: 5,
+    marginRight: 20,
+    marginLeft: 19,
+    },
+
+  filterContainer:{
+    marginTop: 14,
+    flex: 1,
+    flexDirection: 'row',
+  },
+
+  filterImage:{
+    marginLeft: 20,
+    width: 19.8,
+    height: 19.8,
+    marginBottom : 0,
+    alignContent: 'center',
+    resizeMode: 'contain',
+    marginRight: 7
+  },
+
+  filterText: {
+    fontSize: 13,
+    marginLeft : 0,
+  },
+
+  dayContainer: {
+    backgroundColor: '#F1F0F2',
+    marginTop: 0,
+    height: 50,
+  },
+
+  dayText: {
+    fontSize: 17,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    alignContent: 'center',
+    marginTop: 20,
+  },
 
 })
