@@ -5,6 +5,7 @@ import { StyleSheet, Image } from 'react-native';
 import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
 import GalleryScreen from '../screens/GalleryScreen';
+import RecommendScreen from '../screens/RecommendScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
