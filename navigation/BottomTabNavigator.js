@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
 import GalleryScreen from '../screens/GalleryScreen';
 import RecommendScreen from '../screens/RecommendScreen';
+import StatisticScreen from '../screens/StatisticScreen';
 
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
@@ -66,7 +67,7 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Statistics"
-        component={HomeScreen}
+        component={StatisticScreen}
         options={{
           tabBarIcon: () => (
             <Image

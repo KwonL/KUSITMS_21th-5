@@ -15,7 +15,8 @@
     "@expo/vector-icons": "~10.0.6",
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/bottom-tabs": "^5.3.1",
-    "@react-navigation/native": "^5.2.1",
+    "@react-navigation/material-top-tabs": "^5.2.9",
+    "@react-navigation/native": "^5.5.0",
     "@react-navigation/stack": "^5.2.16",
     "axios": "^0.19.2",
     "expo": "~37.0.9",
@@ -39,6 +40,7 @@
     "react-native-screens": "~2.2.0",
     "react-native-svg": "11.0.1",
     "react-native-svg-charts": "^5.4.0",
+    "react-native-tab-view": "^2.14.2",
     "react-native-web": "~0.11.7",
     "react-navigation": "^4.3.9"
   },
