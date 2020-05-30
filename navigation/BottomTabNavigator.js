@@ -6,9 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import CameraScreen from '../screens/CameraScreen';
 import GalleryScreen from '../screens/GalleryScreen';
 import RecommendScreen from '../screens/RecommendScreen';
-import StatisticScreen_daily from '../screens/StatisticScreen_daily';
-//import StatisticScreen_weekly from '../screens/StatisticScreen_weekly';
-
+import StatisticScreenDaily from '../screens/StatisticScreenDaily';
 
 
 const BottomTab = createBottomTabNavigator();
@@ -70,7 +68,7 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Statistics"
-        component={StatisticScreen_daily}
+        component={StatisticScreenDaily}
         options={{
           tabBarIcon: () => (
             <Image
