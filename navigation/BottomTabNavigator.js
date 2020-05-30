@@ -41,7 +41,7 @@ export default function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Food"
-        component={HomeScreen}
+        component={RecommendScreen} // 추천화면
         options={{
           tabBarIcon: () => (
             <Image
