@@ -7,28 +7,31 @@ import axios from '../../utils/axios';
 import styles from './styles';
 import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
 
-export default () => {
+export default (props) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      const res = await axios.get('/login');
+    const fetchData = async () => {
+      const res = await axios.get('/home');
       const sampleData = {
-        calorie: 2332,
+        target_calorie: 2123,
         nutrients: {
           carbohydrate: 0.5,
           protein: 0.25,
           fat: 0.25,
         },
       };
-      data.name = res.data.kor_name;
       setData({
         ...sampleData,
-        ...data,
+        ...res.data,
       });
       setLoading(false);
-    })();
+    };
+
+    props.navigation.addListener('focus', () => {
+      fetchData();
+    });
   }, []);
 
   return loading ? <View /> : (
@@ -46,17 +49,23 @@ export default () => {
         <KakaoRegularText style={styles.msgText}>
           오늘
           {' '}
-          {data.name}
+          {data.kor_name}
           님의 영양 상태
         </KakaoRegularText>
 
-        <View style={[styles.sectionContainer, { marginBottom: 100 }]}>
-          <KakaoBoldText style={styles.nutAlertText}>지방 섭취가 부족해요!</KakaoBoldText>
-
+        <View style={[styles.sectionContainer, { marginTop: 30, marginBottom: 100 }]}>
           <View style={{ justifyContent: 'center', flex: 1, marginBottom: 15 }}>
             <View style={styles.graphCalText}>
+              <KakaoRegularText style={{
+                fontSize: 10, textAlign: 'center', color: '#352641', opacity: 53,
+              }}
+              >
+                목표(
+                {data.target_calorie}
+                Kcal) 대비
+              </KakaoRegularText>
               <KakaoRegularText style={{ fontSize: 32, textAlign: 'center' }}>
-                {data.calorie}
+                {data.calories.reduce((a, b) => a + b, 0)}
               </KakaoRegularText>
               <KakaoRegularText style={{
                 fontSize: 11, textAlign: 'center', color: '#352641', opacity: 53,
@@ -67,24 +76,12 @@ export default () => {
             </View>
             <PieChart
               style={{ width: 200, height: 200 }}
-              valueAccessor={({ item }) => item.percent}
-              data={[
-                {
-                  key: 1,
-                  percent: data.nutrients.carbohydrate,
-                  svg: { fill: '#608BAC' },
-                },
-                {
-                  key: 2,
-                  percent: data.nutrients.protein,
-                  svg: { fill: '#D47FA6' },
-                },
-                {
-                  key: 3,
-                  percent: data.nutrients.fat,
-                  svg: { fill: '#B5BACE' },
-                },
-              ]}
+              valueAccessor={({ item }) => (item.percent)}
+              data={data.calories.map((val, idx) => ({
+                key: idx,
+                percent: val / data.target_calorie,
+                svg: { fill: ['#259BB1', '#52BFD3', '#A8DDE6'][idx % 3] },
+              }))}
               spacing={0}
               outerRadius="100%"
               innerRadius="75%"
