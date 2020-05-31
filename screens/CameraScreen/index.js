@@ -26,7 +26,7 @@ const ImagePreviewView = (props) => {
               onPress: () => props.navigation.navigate('Gallery'),
             },
             {
-              text: '틀렸어요 ㅎ;',
+              text: '응 아니야~',
               onPress: () => {
                 axios.delete(`/food/gallery/${res.data.id}`);
               },

@@ -26,7 +26,7 @@ export default (props) => {
         ...sampleData,
         ...res.data,
       });
-      setLoading(false);
+      if (res.data.calories) { setLoading(false); }
     };
 
     props.navigation.addListener('focus', () => {
@@ -46,14 +46,11 @@ export default (props) => {
           {/* 캐릭터 이미지 */}
         </View>
 
-        <KakaoRegularText style={styles.msgText}>
-          오늘
-          {' '}
-          {data.kor_name}
-          님의 영양 상태
-        </KakaoRegularText>
+        <View style={[styles.sectionContainer, { marginBottom: 100 }]}>
+          <KakaoRegularText style={styles.msgText}>
+            {`오늘 ${data.kor_name} 님의 영양 상태`}
+          </KakaoRegularText>
 
-        <View style={[styles.sectionContainer, { marginTop: 30, marginBottom: 100 }]}>
           <View style={{ justifyContent: 'center', flex: 1, marginBottom: 15 }}>
             <View style={styles.graphCalText}>
               <KakaoRegularText style={{
