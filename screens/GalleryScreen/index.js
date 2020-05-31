@@ -30,7 +30,6 @@ export default (props) => {
           });
         }
       });
-      tmp.reverse();
       setData(tmp);
     }).catch((err) => {
       console.log(err);
