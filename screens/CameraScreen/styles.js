@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export default styles = StyleSheet.create({
+export default StyleSheet.create({
   cameraViewContainer: {
     marginTop: 20,
     display: 'flex',
@@ -14,6 +14,13 @@ export default styles = StyleSheet.create({
   picButtonContainer: {
     alignSelf: 'center',
     margin: 40,
+  },
+  selectionButton: {
+    fontSize: 20,
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingVertical: 15,
+    borderRadius: 20,
   },
   picButtonInner: {
     borderWidth: 2,

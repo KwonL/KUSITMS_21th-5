@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, ActivityIndicator, Image, Text, Platform, TouchableOpacity,
+  View, ActivityIndicator, Image, Platform, TouchableOpacity, Alert,
 } from 'react-native';
 import * as Permissions from 'expo-permissions';
-import * as ImagePicker from 'expo-image-picker';
 import { Camera } from 'expo-camera';
+import { KakaoRegularText } from '../../components/StyledText';
 import styles from './styles';
 import axios from '../../utils/axios';
 
 const ImagePreviewView = (props) => {
-  const [prediction, setPrediction] = useState('');
-
   const predict = async () => {
     props.setIsLoading(true);
 
@@ -19,7 +17,22 @@ const ImagePreviewView = (props) => {
       image: props.image.base64,
     }).then((res) => {
       if (res.status === 201) {
-        setPrediction(res.data.name);
+        Alert.alert(
+          '음식 예측 결과',
+          `예측 결과는 ${res.data.name} 입니다.`,
+          [
+            {
+              text: '맞와요!',
+              onPress: () => props.navigation.navigate('Gallery'),
+            },
+            {
+              text: '틀렸어요 ㅎ;',
+              onPress: () => {
+                axios.delete(`/food/gallery/${res.data.id}`);
+              },
+            },
+          ],
+        );
       } else {
         console.log(res.data);
       }
@@ -39,31 +52,24 @@ const ImagePreviewView = (props) => {
           onPress={() => {
             props.setImage(null);
           }}
+          style={styles.selectionButton}
         >
-          <Text style={{ fontSize: 20 }}>다시 찍기</Text>
+          <KakaoRegularText style={{ fontSize: 20 }}>다시 찍기</KakaoRegularText>
         </TouchableOpacity>
-        <TouchableOpacity disabled={props.isLoading} onPress={predict}>
-          <Text style={{ fontSize: 20 }}>사용하기</Text>
+        <TouchableOpacity
+          disabled={props.isLoading}
+          onPress={predict}
+          style={styles.selectionButton}
+        >
+          <KakaoRegularText style={{ fontSize: 20 }}>사용하기</KakaoRegularText>
         </TouchableOpacity>
       </View>
-      {prediction !== '' && (<Text>{prediction}</Text>)}
     </View>
   );
 };
 
 const CameraView = (props) => {
   const [cameraRef, setCameraRef] = useState(null);
-
-  const pickImage = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-      base64: true,
-    });
-    if (!result.cancelled) { props.setImage(result); }
-  };
 
   return (
     <View style={styles.cameraViewContainer}>
@@ -83,9 +89,6 @@ const CameraView = (props) => {
         <View style={styles.picButtonInner}>
           <View style={styles.picButtonOuter} />
         </View>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.albumButton} onPress={pickImage}>
-        <Text style={styles.albumText}>앨범 탐색 버튼이 올 곳</Text>
       </TouchableOpacity>
     </View>
   );
@@ -126,7 +129,7 @@ export default (props) => {
   }, []);
 
   if (!rollPermission || !cameraPermission) {
-    return <Text>카메라 접근 권한이 필요합니다.</Text>;
+    return <KakaoRegularText>카메라 접근 권한이 필요합니다.</KakaoRegularText>;
   }
 
   return (
@@ -134,6 +137,7 @@ export default (props) => {
       {image
         ? (
           <ImagePreviewView
+            navigation={props.navigation}
             image={image}
             setImage={setImage}
             setIsLoading={setIsLoading}
