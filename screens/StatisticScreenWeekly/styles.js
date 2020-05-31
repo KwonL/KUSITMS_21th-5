@@ -27,9 +27,10 @@ export default StyleSheet.create({
   },
 
   filterContainer: {
-    marginTop: 15.49,
+    marginTop: 14,
     flex: 1,
     flexDirection: 'row',
+    backgroundColor : '#F1F0F2'
 
   },
   filterImage: {
@@ -44,6 +45,16 @@ export default StyleSheet.create({
   weekText: {
     fontSize: 17,
     marginLeft: 52,
+    marginRight: 'auto',
+    alignContent: 'center',
+    marginTop: 20,
+  },
+
+  weekText2: {
+    fontSize: 17,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    alignContent: 'center',
     marginTop: 20,
   },
 
@@ -108,10 +119,18 @@ export default StyleSheet.create({
     backgroundColor: '#F1F0F2',
     height: 558,
     alignItems: 'center',
+    backgroundColor: '#FFFFFF',
 
   },
 
   weekContainer: {
+    backgroundColor: '#FFFFFF',
+    marginTop: 0,
+    height: 50,
+    
+  },
+
+  weekContainer2: {
     backgroundColor: '#F1F0F2',
     marginTop: 0,
     height: 50,
@@ -150,9 +169,13 @@ export default StyleSheet.create({
   comment: {
     fontSize: 12,
     color: '#71677A',
-    paddingTop: 15,
+    marginTop: 5,
     marginRight: 20,
     marginLeft: 19,
-    marginBottom: 20,
+    backgroundColor: '#F1F0F2',
   },
+
+  lastweek :{
+  backgroundColor :'#F1F0F2',
+  }
 });

@@ -76,7 +76,7 @@ export default () => {
       </View>
 
       <View style={styles.weekContainer}>
-        <KakaoRegularText style={styles.weekText}>지난 한 주 평균 영양상태</KakaoRegularText>
+        <KakaoBoldText style={styles.weekText}>지난 한 주 평균 영양상태</KakaoBoldText>
       </View>
       <View style={styles.secondContainer}>
         <View style={{ justifyContent: 'center', flex: 1, marginBottom: 15 }}>
@@ -152,9 +152,9 @@ export default () => {
         </View>
 
       </View>
-
-      <View style={styles.weekContainer}>
-        <KakaoRegularText style={styles.weekText}>지난 한 주 이야기</KakaoRegularText>
+      <View style={styles.lastweek}>
+      <View style={styles.weekContainer2}>
+        <KakaoRegularText style={styles.weekText2}>지난 한 주 이야기</KakaoRegularText>
       </View>
 
       <View style={styles.filterContainer}>
@@ -196,7 +196,7 @@ export default () => {
         요즘 유행하는 단백질 파우더보다는 식품에서 섭취하는 양질의 단백질을 섭취하는 것이 중요합니다.
         적절한 단백질 섭취에 도움을 주는 음식은 두부, 오징어, 계란, 소고기, 그리고 닭가슴살이 있습니다.
       </KakaoRegularText>
-
+      </View>
     </ScrollView>
   );
 };
