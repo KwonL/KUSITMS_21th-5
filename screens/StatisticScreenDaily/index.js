@@ -25,13 +25,6 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: 'white',
-        }}
-      >
-        <KakaoBoldText style={styles.StatisticText}>분석</KakaoBoldText>
-      </View>
       <ScrollView style={styles.container}>
         <View style={[styles.StaticContainer, { height: 320 }]}>
           <KakaoBoldText style={styles.today}>오늘</KakaoBoldText>

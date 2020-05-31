@@ -36,14 +36,11 @@ export default () => {
 
   return loading ? <View /> : (
     <ScrollView style={styles.container}>
-      <KakaoBoldText style={styles.Title}>분석</KakaoBoldText>
-
       <View style={{
         marginLeft: 'auto',
         marginRight: 'auto',
       }}
       />
-
 
       <View style={styles.productContainer}>
 
