@@ -1,15 +1,12 @@
 {
   "expo": {
-    "name": "5조",
-    "slug": "KUSITMS-5",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "name": "단짠단짠",
+    "slug": "KUSITMS-dzdz",
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "kusitms-5",
+    "scheme": "dzdz",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -18,14 +15,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.kusitms.danzzandanzzan",
       "supportsTablet": true
     },
     "android": {
-      "package": "com.kusitms.group_5",
+      "package": "com.kusitms.danzzandanzzan",
       "versionCode": 1
     }
   }
