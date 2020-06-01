@@ -14,18 +14,7 @@ export default (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get('/home');
-      const sampleData = {
-        target_calorie: 2123,
-        nutrients: {
-          carbohydrate: 0.5,
-          protein: 0.25,
-          fat: 0.25,
-        },
-      };
-      setData({
-        ...sampleData,
-        ...res.data,
-      });
+      setData(res.data);
       if (res.data.calories) { setLoading(false); }
     };
 
@@ -58,7 +47,7 @@ export default (props) => {
               }}
               >
                 목표(
-                {data.target_calorie}
+                {data.target_nutrients.calorie}
                 Kcal) 대비
               </KakaoRegularText>
               <KakaoRegularText style={{ fontSize: 32, textAlign: 'center' }}>
@@ -76,7 +65,7 @@ export default (props) => {
               valueAccessor={({ item }) => (item.percent)}
               data={data.calories.map((val, idx) => ({
                 key: idx,
-                percent: val / data.target_calorie,
+                percent: val / data.target_nutrients.calorie,
                 svg: { fill: ['#259BB1', '#52BFD3', '#A8DDE6'][idx % 3] },
               }))}
               spacing={0}
@@ -92,9 +81,9 @@ export default (props) => {
               <KakaoRegularText style={styles.pgbarNutText}>
                 탄수화물
               </KakaoRegularText>
-              <Progress.Bar style={{ alignSelf: 'center' }} progress={data.nutrients.carbohydrate} color="#87A9C3" unfilledColor="#EAE7F0" width={183} height={19} borderRadius={7} />
+              <Progress.Bar style={{ alignSelf: 'center' }} progress={data.carbohydrate / data.target_nutrients.carbohydrate} color="#87A9C3" unfilledColor="#EAE7F0" width={183} height={19} borderRadius={7} />
               <KakaoRegularText style={styles.pgbarPercentText}>
-                {data.nutrients.carbohydrate * 100}
+                {Math.round((data.carbohydrate / data.target_nutrients.carbohydrate) * 100, 2)}
                 %
               </KakaoRegularText>
             </View>
@@ -102,9 +91,9 @@ export default (props) => {
               <KakaoRegularText style={styles.pgbarNutText}>
                 단백질
               </KakaoRegularText>
-              <Progress.Bar progress={data.nutrients.protein} color="#D47FA6" unfilledColor="#EAE7F0" width={183} height={19} borderRadius={7} />
+              <Progress.Bar progress={data.protein / data.target_nutrients.protein} color="#D47FA6" unfilledColor="#EAE7F0" width={183} height={19} borderRadius={7} />
               <KakaoRegularText style={styles.pgbarPercentText}>
-                {data.nutrients.protein * 100}
+                {Math.round((data.protein / data.target_nutrients.protein) * 100, 2)}
                 %
               </KakaoRegularText>
             </View>
@@ -112,9 +101,9 @@ export default (props) => {
               <KakaoRegularText style={styles.pgbarNutText}>
                 지방
               </KakaoRegularText>
-              <Progress.Bar progress={data.nutrients.fat} color="#B5BACE" unfilledColor="#EAE7F0" width={183} height={19} borderRadius={7} />
+              <Progress.Bar progress={data.fat / data.target_nutrients.fat} color="#B5BACE" unfilledColor="#EAE7F0" width={183} height={19} borderRadius={7} />
               <KakaoRegularText style={styles.pgbarPercentText}>
-                {data.nutrients.fat * 100}
+                {Math.round((data.fat / data.target_nutrients.fat) * 100, 2)}
                 %
               </KakaoRegularText>
             </View>
