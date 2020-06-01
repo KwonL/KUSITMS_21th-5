@@ -11,10 +11,12 @@ export default (props) => {
   const fetchData = () => {
     axios.get('/food/gallery').then((res) => {
       const tmp = [];
-      res.data.forEach((val, idx) => {
+      const response = res.data;
+      response.reverse();
+      response.forEach((val, idx) => {
         const initMonth = 5;
         const initDay = 15;
-        const slice = res.data.slice(idx, idx + 3);
+        const slice = response.slice(idx, idx + 3);
 
         if (!(idx % 3)) {
           tmp.push({
@@ -30,6 +32,7 @@ export default (props) => {
           });
         }
       });
+      tmp.reverse();
       setData(tmp);
     }).catch((err) => {
       console.log(err);
