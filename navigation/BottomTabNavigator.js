@@ -24,7 +24,7 @@ export default function BottomTabNavigator() {
       initialRouteName={INITIAL_ROUTE_NAME}
       tabBarOptions={{
         style: {
-          height: 45,
+          height: 60,
         },
         showLabel: false,
       }}
