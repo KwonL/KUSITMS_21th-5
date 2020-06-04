@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
-import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Image } from 'react-native';
+import { TouchableOpacity, TextInput } from 'react-native-gesture-handler';
+import { KakaoBoldText } from '../../components/StyledText';
 import axios from '../../utils/axios';
+import styles from './styles';
 
 export default (props) => {
   const [username, setUsername] = useState('');
@@ -37,22 +39,37 @@ export default (props) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.logoImage}
+          source={require('../../assets/images/icon.png')}
+        />
+      </View>
       <TextInput
         autoCapitalize="none"
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        placeholder="아이디"
+        style={styles.inputText}
         onChangeText={(text) => setUsername(text)}
       />
       <TextInput
         autoCapitalize="none"
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        placeholder="비밀번호"
+        style={styles.inputText}
         secureTextEntry
         onChangeText={(text) => setPassword(text)}
       />
       <TouchableOpacity
         onPress={login}
       >
-        <Text>로그인하기</Text>
+        <KakaoBoldText style={{
+          fontSize: 20,
+          marginBottom: 50,
+          marginTop: 20,
+        }}
+        >
+          로그인
+        </KakaoBoldText>
       </TouchableOpacity>
     </View>
   );

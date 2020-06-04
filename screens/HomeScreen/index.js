@@ -3,6 +3,7 @@ import { Image, View, ScrollView } from 'react-native';
 import { PieChart } from 'react-native-svg-charts';
 import * as Progress from 'react-native-progress';
 
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import axios from '../../utils/axios';
 import styles from './styles';
 import { KakaoRegularText, KakaoBoldText } from '../../components/StyledText';
@@ -23,12 +24,29 @@ export default (props) => {
     });
   }, []);
 
+  const logout = () => {
+    axios.delete('/login').then((res) => {
+      if (res.status === 200) {
+        props.navigation.reset({
+          index: 0,
+          routes: [{ name: 'Login' }],
+        });
+      } else {
+        console.log(res);
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+  };
+
   return loading ? <View /> : (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <KakaoBoldText style={styles.titleText}>
-          단짠단짠
-        </KakaoBoldText>
+        <TouchableOpacity onPress={logout}>
+          <KakaoBoldText style={styles.titleText}>
+            단짠단짠
+          </KakaoBoldText>
+        </TouchableOpacity>
       </View>
       <ScrollView>
         <View style={styles.characterContainer}>

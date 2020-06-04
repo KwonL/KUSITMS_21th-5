@@ -72,7 +72,7 @@ export default (props) => {
               images={item.images}
               sliderBoxHeight={400}
               marginTop={10}
-              dotColor="#FFEE58"
+              dotColor="#FFFFFF"
               inactiveDotColor="#B5BACE"
             />
             <View style={styles.hashtag_container}>
