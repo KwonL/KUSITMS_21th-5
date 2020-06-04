@@ -31,8 +31,12 @@ export default (props) => {
         </KakaoBoldText>
       </View>
       <ScrollView>
-        <View style={[styles.sectionContainer, { height: 310, backgroundColor: 'white' }]}>
-          {/* 캐릭터 이미지 */}
+        <View style={styles.characterContainer}>
+          <Image
+            style={styles.characterImage}
+            source={{ uri: data.image }}
+          />
+          {/* <KakaoBoldText style={styles.characterMsgText}>너무 배가 고파..</KakaoBoldText> */}
         </View>
 
         <View style={[styles.sectionContainer, { marginBottom: 100 }]}>

@@ -24,10 +24,23 @@ export default StyleSheet.create({
   sectionContainer: {
     alignItems: 'center',
   },
+  characterContainer: {
+    flex: 1,
+    height: 310,
+    backgroundColor: 'white',
+  },
   characterImage: {
-    alignContent: 'center',
-    height: 150,
+    flex: 1,
     resizeMode: 'contain',
+    height: null,
+    width: null,
+  },
+  characterMsgText: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    fontSize: 18,
+    margin: 10,
   },
   msgText: {
     color: '#334856',
